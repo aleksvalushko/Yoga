@@ -76,10 +76,6 @@ window.addEventListener("DOMContentLoaded", function () {
                     seconds.textContent = '00';
                 }
             }
-            /*if (t.seconds.length < 2) {  //добавляем 0 t.hours.length < 2 || t.minutes.length < 2 ||
-                t.seconds.push('0');
-            }*/
-
     }
 
     setClock('timer', deadline);

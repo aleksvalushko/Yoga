@@ -39,7 +39,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
    //Timer
 
-    let deadline = '2019-04-8';
+    let deadline = '2019-04-10';
 
     function getTimeRemaining(endtime) {
         let t = Date.parse(endtime) - Date.parse(new Date()),
@@ -63,25 +63,54 @@ window.addEventListener("DOMContentLoaded", function () {
             seconds = timer.querySelector('.seconds'),
             timeInterval = setInterval(clockUpdate, 1000);
 
-            function clockUpdate() {
-                let t = getTimeRemaining(endtime);
-                hours.textContent = (t.hours < 10 ? '0' : '') + t.hours;
-                minutes.textContent = (t.minutes < 10 ? '0' : '') + t.minutes;
-                seconds.textContent = (t.seconds < 10 ? '0'  : '') + t.seconds;
+        function clockUpdate() {
+            let t = getTimeRemaining(endtime);
 
-                if (t.total <= 0){
-                    clearInterval(timeInterval);
-                    hours.textContent = '00';
-                    minutes.textContent = '00';
-                    seconds.textContent = '00';
-                }
+            function zero(num) {
+                if (num < 10) {
+                    return '0' + num;
+                } else return num;
             }
+
+            hours.textContent = zero(t.hours);
+            minutes.textContent = zero(t.minutes);
+            seconds.textContent = zero(t.seconds);
+
+            if (t.total <= 0){
+                clearInterval(timeInterval);
+                hours.textContent = '00';
+                minutes.textContent = '00';
+                seconds.textContent = '00';
+            }
+        }
     }
 
     setClock('timer', deadline);
 
-    function endDeadline() {
-        
-    }
+    //Modal
 
+    let more = document.querySelector('.more'),
+        overlay = document.querySelector('.overlay'),
+        close = document.querySelector('.popup-close'),
+        descriptionBtn = document.querySelectorAll('.description-btn');
+
+    more.addEventListener('click', function () {
+       overlay.style.display = 'block';
+       this.classList.add('more-splash');
+       document.body.style.overflow = 'hidden'; //При всплытии модального окна, прокручивать страницу нельзя
+    });
+
+    close.addEventListener('click', function () {
+        overlay.style.display = 'none';
+        more.classList.remove('more-splash');
+        document.body.style.overflow = '';
+    });
+
+    descriptionBtn.forEach(function (item) {
+        item.addEventListener('click', function () {
+           overlay.style.display = 'block';
+           this.className.add('more-splash');
+           document.body.style.overflow = 'hidden';
+        });
+    });
 });

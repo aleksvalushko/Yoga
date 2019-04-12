@@ -7,7 +7,7 @@ window.addEventListener("DOMContentLoaded", function () {
        info = document.querySelector('.info-header'),
        tabContent = document.querySelectorAll('.info-tabcontent');
 
-   function hideTabContent(a) {
+   function hideTabContent(a){
        for (let i = a; i < tabContent.length; i++) {
            tabContent[i].classList.remove('show');
            tabContent[i].classList.add('hide');
@@ -16,7 +16,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
    hideTabContent(1);
 
-   function showTabContent(b) {
+   function showTabContent(b){
        if (tabContent[b].classList.contains('hide')){
            tabContent[b].classList.remove('hide');
            tabContent[b].classList.add('show');
@@ -39,9 +39,9 @@ window.addEventListener("DOMContentLoaded", function () {
 
    //Timer
 
-    let deadline = '2019-04-10';
+    const DEADLINE = '2019-04-24';
 
-    function getTimeRemaining(endtime) {
+    function getTimeRemaining(endtime){
         let t = Date.parse(endtime) - Date.parse(new Date()),
             seconds = Math.floor((t/1000) % 60),
             minutes = Math.floor((t/1000/60) % 60),
@@ -56,7 +56,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
     }
 
-    function setClock(id, endtime) {
+    function setClock(id, endtime){
         let timer = document.getElementById(id),
             hours = timer.querySelector('.hours'),
             minutes = timer.querySelector('.minutes'),
@@ -66,9 +66,9 @@ window.addEventListener("DOMContentLoaded", function () {
         function clockUpdate() {
             let t = getTimeRemaining(endtime);
 
-            function zero(num) {
+            var zero = (num) => {
                 if (num < 10) {
-                    return '0' + num;
+                    return `0${num}`;
                 } else return num;
             }
 
@@ -85,7 +85,7 @@ window.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    setClock('timer', deadline);
+    setClock('timer', DEADLINE);
 
     //Modal
 
